@@ -1,0 +1,151 @@
+---
+const navItems = [
+  {
+    name: "Sobre Mí",
+    href: "#about",
+    color: "neon-pink"
+  },
+  {
+    name: "Proyectos",
+    href: "#projects",
+    color: "neon-purple"
+  },
+  {
+    name: "Habilidades",
+    href: "#skills",
+    color: "neon-violet"
+  }
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50">
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between py-4">
+      <!-- Logo/Nombre -->
+      <a href="/" class="text-2xl font-bold text-white hover:text-neon-pink transition-colors duration-300">
+        Portfolio
+      </a>
+
+      <!-- Navegación Desktop -->
+      <div class="hidden md:flex items-center gap-8">
+        {
+          navItems.map(item => (
+            <a href={item.href} 
+               class="text-white hover:text-neon-purple transition-colors duration-300">
+              {item.name}
+            </a>
+          ))
+        }
+        <a href="#contact" 
+           class="px-4 py-2 rounded-lg border border-neon-purple text-white 
+                  hover:bg-neon-purple/10 transition-all duration-300">
+          Contacto
+        </a>
+      </div>
+
+      <!-- Botón menú móvil -->
+      <button 
+        class="md:hidden p-2 text-white hover:text-neon-purple transition-colors duration-300"
+        id="menu-toggle"
+        aria-label="Menú">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="h-6 w-6" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor">
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M4 6h16M4 12h16m-16 6h16" 
+          />
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Menú móvil -->
+  <div class="hidden fixed inset-0 bg-deep-purple/95 backdrop-blur-sm z-50" id="mobile-menu">
+    <nav class="h-full flex flex-col items-center justify-center space-y-8">
+      <button 
+        class="absolute top-4 right-4 p-2 text-white hover:text-neon-purple transition-colors duration-300"
+        id="menu-close">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          class="h-6 w-6" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor">
+          <path 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M6 18L18 6M6 6l12 12" 
+          />
+        </svg>
+      </button>
+
+      {
+        navItems.map(item => (
+          <a href={item.href} 
+             class="text-xl text-white hover:text-neon-purple transition-colors duration-300">
+            {item.name}
+          </a>
+        ))
+      }
+      <a href="#contact" 
+         class="text-xl text-neon-purple hover:text-white transition-colors duration-300">
+        Contacto
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('header');
+  const menuToggle = document.getElementById('menu-toggle');
+  const menuClose = document.getElementById('menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+
+  let lastScroll = 0;
+
+  // Función para controlar la visibilidad del header al hacer scroll
+  function handleScroll() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+      header?.classList.remove('backdrop-blur-sm', 'bg-deep-purple/80');
+    } else {
+      header?.classList.add('backdrop-blur-sm', 'bg-deep-purple/80');
+      
+      if (currentScroll > lastScroll && !mobileMenu?.classList.contains('hidden')) {
+        header?.classList.add('-translate-y-full');
+      } else {
+        header?.classList.remove('-translate-y-full');
+      }
+    }
+    
+    lastScroll = currentScroll;
+  }
+
+  // Función para alternar el menú móvil
+  function toggleMenu() {
+    mobileMenu?.classList.toggle('hidden');
+    document.body.classList.toggle('overflow-hidden');
+  }
+
+  // Event listeners
+  window.addEventListener('scroll', handleScroll);
+  menuToggle?.addEventListener('click', toggleMenu);
+  menuClose?.addEventListener('click', toggleMenu);
+  
+  // Cerrar menú al hacer clic en un enlace
+  mobileMenuLinks?.forEach(link => {
+    link.addEventListener('click', toggleMenu);
+  });
+
+  // Inicialización
+  handleScroll();
+</script>

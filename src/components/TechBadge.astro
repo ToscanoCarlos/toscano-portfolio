@@ -1,0 +1,41 @@
+---
+interface Props {
+  tech: string;
+}
+
+const { tech } = Astro.props;
+
+const getTechIcon = (tech: string) => {
+  const techLower = tech.toLowerCase();
+  
+  const icons: Record<string, string> = {
+    'python': 'https://unpkg.com/simple-icons@v8/icons/python.svg',
+    'react': 'https://unpkg.com/simple-icons@v8/icons/react.svg',
+    'nextjs': 'https://unpkg.com/simple-icons@v8/icons/nextdotjs.svg',
+    'django': 'https://unpkg.com/simple-icons@v8/icons/django.svg',
+    'tensorflow': 'https://unpkg.com/simple-icons@v8/icons/tensorflow.svg',
+    'mysql': 'https://unpkg.com/simple-icons@v8/icons/mysql.svg',
+    'spring': 'https://unpkg.com/simple-icons@v8/icons/spring.svg',
+    'html': 'https://unpkg.com/simple-icons@v8/icons/html5.svg',
+    'css': 'https://unpkg.com/simple-icons@v8/icons/css3.svg',
+    'javascript': 'https://unpkg.com/simple-icons@v8/icons/javascript.svg',
+    'typescript': 'https://unpkg.com/simple-icons@v8/icons/typescript.svg',
+    'sass': 'https://unpkg.com/simple-icons@v8/icons/sass.svg',
+    'php': 'https://unpkg.com/simple-icons@v8/icons/php.svg'
+  };
+
+  return icons[techLower] || null;
+}
+
+const icon = getTechIcon(tech);
+---
+
+<span class="px-3 py-1.5 text-sm rounded-md bg-light-purple/50 text-white
+             transform transition-all duration-300 group-hover:scale-105 
+             hover:bg-neon-purple/20 hover:text-neon-purple flex items-center gap-2
+             cursor-default">
+  {icon && (
+    <img src={icon} alt={tech} class="w-4 h-4" style="filter: invert(1);" />
+  )}
+  {tech}
+</span>

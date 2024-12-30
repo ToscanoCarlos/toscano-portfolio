@@ -1,0 +1,45 @@
+---
+---
+
+<div 
+  id="toast"
+  class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50
+         py-2 px-4 rounded-lg
+         bg-deep-purple/90 backdrop-blur-sm
+         border border-neon-purple/20
+         text-white text-sm
+         opacity-0 -translate-y-4
+         transition-all duration-300 pointer-events-none
+         flex items-center gap-2"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-neon-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+  </svg>
+  <span>¡Correo copiado al portapapeles!</span>
+</div>
+
+<script>
+  const toast = document.getElementById('toast');
+  
+  function showToast() {
+    if (toast) {
+      toast.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+      }, 2000);
+    }
+  }
+
+  // Agregar funcionalidad de copiar al correo
+  document.querySelectorAll('a[href^="mailto:"]').forEach(mailLink => {
+    mailLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const email = mailLink.getAttribute('href')?.replace('mailto:', '');
+      if (email) {
+        navigator.clipboard.writeText(email).then(() => {
+          showToast();
+        });
+      }
+    });
+  });
+</script>

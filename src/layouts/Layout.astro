@@ -1,22 +1,60 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+---
+import '@fontsource/space-grotesk';
+import '@fontsource/inter';
+import Toast from '../components/Toast.astro';
+import ParticlesBackground from '../components/ParticlesBackground.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Carlos Eduardo Toscano Sarabio - Portfolio" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-deep-purple text-white transition-colors duration-300">
+    <div class="relative min-h-screen">
+      <ParticlesBackground />
+      <!-- Gradiente base -->
+      <div class="fixed inset-0 -z-10">
+        <div class="absolute inset-0 bg-gradient-to-br from-deep-purple via-neon-purple/20 to-neon-pink/20 opacity-30"></div>
+      </div>
+      
+      <main class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <slot />
+      </main>
+    </div>
+    <Toast />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    --primary: #FF3366;
+    --secondary: #B24BF3;
+    --accent: #9D4EDD;
+    --background: #0A0910;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  ::selection {
+    @apply bg-neon-purple text-white;
+  }
 </style>

@@ -1,0 +1,102 @@
+---
+---
+
+<div id="tsparticles" class="fixed inset-0 -z-10">
+    <!-- Las partículas se renderizarán aquí -->
+  </div>
+  
+  <script>
+    import { tsParticles } from "tsparticles-engine";
+    import { loadSlim } from "tsparticles-slim";
+  
+    async function initParticles() {
+      await loadSlim(tsParticles);
+      
+      await tsParticles.load("tsparticles", {
+        background: {
+          color: {
+            value: "transparent",
+          },
+        },
+        particles: {
+          number: {
+            value: 100,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: ["#FF3366", "#B24BF3", "#9D4EDD"],
+          },
+          shape: {
+            type: "circle",
+          },
+          opacity: {
+            value: 0.7,
+            random: true,
+            animation: {
+              enable: true,
+              speed: 1,
+              minimumValue: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 2,
+            random: true,
+            animation: {
+              enable: true,
+              speed: 2,
+              minimumValue: 0.5,
+              sync: false,
+            },
+          },
+          move: {
+            enable: true,
+            speed: 0.5,
+            direction: "none",
+            random: true,
+            straight: false,
+            outModes: {
+              default: "out",
+            },
+            attract: {
+              enable: true,
+              rotateX: 600,
+              rotateY: 1200,
+            },
+          },
+          twinkle: {
+            particles: {
+              enable: true,
+              frequency: 0.05,
+              opacity: 1,
+            },
+          },
+        },
+        interactivity: {
+          detectsOn: "canvas",
+          events: {
+            onHover: {
+              enable: true,
+              mode: "bubble",
+            },
+            resize: true,
+          },
+          modes: {
+            bubble: {
+              distance: 200,
+              size: 4,
+              duration: 2,
+              opacity: 0.8,
+            },
+          },
+        },
+        retina_detect: true,
+      });
+    }
+  
+    // Inicializar las partículas cuando el documento esté listo
+    document.addEventListener("DOMContentLoaded", initParticles);
+  </script>

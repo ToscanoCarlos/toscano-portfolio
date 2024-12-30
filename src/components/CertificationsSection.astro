@@ -1,0 +1,93 @@
+---
+interface Certification {
+  title: string;
+  platform: string;
+  progress: number;
+  url?: string;
+  icon: string;
+}
+
+const certifications: Certification[] = [
+  {
+    title: "GIT+GitHub: Todo un sistema de control de versiones de cero",
+    platform: "DevTalles",
+    progress: 100,
+    icon: "github"
+  },
+  {
+    title: "Machine Learning de A a la Z: R y Python para Data Science",
+    platform: "Udemy",
+    progress: 100,
+    icon: "python"
+  },
+  {
+    title: "Desarrollo Web Completo con HTML5, CSS3, JS AJAX PHP y MySQL",
+    platform: "Udemy",
+    progress: 68,
+    icon: "html5"
+  }
+];
+---
+
+<section class="py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-12 text-center">
+      <span class="relative inline-block">
+        Certificaciones
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-neon-pink to-neon-purple"></span>
+      </span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {certifications.map((cert) => (
+        <div class="group relative">
+          <div class="relative overflow-hidden bg-deep-purple/50 backdrop-blur-sm p-6 rounded-xl
+                      border border-neon-purple/20 h-full transition-all duration-300
+                      hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#B24BF3,0_0_15px_#B24BF3]">
+            {/* Efecto hover */}
+            <div class="absolute inset-0">
+              <div class="absolute inset-0 bg-gradient-to-br from-neon-purple/10 via-transparent to-neon-pink/10 
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div class="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-transparent 
+                          opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            </div>
+
+            {/* Contenido */}
+            <div class="relative z-10 flex flex-col h-full">
+              <div class="flex items-start gap-4 mb-4">
+                <div class="bg-deep-purple/50 p-3 rounded-lg">
+                  <img 
+                    src={`https://unpkg.com/simple-icons@v8/icons/${cert.icon}.svg`}
+                    class="w-6 h-6"
+                    style="filter: invert(1);"
+                    alt={cert.title}
+                  />
+                </div>
+                <div class="flex-1">
+                  <h3 class="font-bold text-lg mb-1 bg-gradient-to-r from-neon-pink to-neon-purple bg-clip-text text-transparent">
+                    {cert.title}
+                  </h3>
+                  <p class="text-gray-400 text-sm">{cert.platform}</p>
+                </div>
+              </div>
+
+              <div class="mt-auto">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm text-gray-400">Progreso</span>
+                  <span class="text-sm text-neon-pink">{cert.progress}%</span>
+                </div>
+                <div class="h-2 bg-deep-purple rounded-full overflow-hidden">
+                  <div 
+                    class="h-full bg-gradient-to-r from-neon-purple to-neon-pink
+                           transition-all duration-500 group-hover:scale-x-105 origin-left"
+                    style={`width: ${cert.progress}%`}>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

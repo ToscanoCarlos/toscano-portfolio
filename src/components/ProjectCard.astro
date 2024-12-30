@@ -1,0 +1,107 @@
+---
+import type { Project } from '../types/projects';
+import TechBadge from './TechBadge.astro';
+
+interface Props extends Project {}
+
+const { title, description, technologies, image, githubUrl, demoUrl, type, featured } = Astro.props;
+
+const getTypeColor = (type: string) => {
+  switch(type) {
+    case 'ml':
+      return 'from-neon-purple to-neon-pink';
+    case 'web':
+      return 'from-neon-violet to-neon-purple';
+    default:
+      return 'from-neon-pink to-neon-violet';
+  }
+};
+---
+
+<article class={`
+  group relative overflow-hidden rounded-xl p-[2px] transition-all duration-500
+  ${featured ? 'md:col-span-2' : ''}
+  bg-gradient-to-r from-transparent via-neon-purple to-transparent
+  hover:from-neon-purple hover:via-neon-violet hover:to-neon-purple
+  animate-border-flow bg-[length:200%_100%]
+`}>
+  <div class="h-full rounded-lg bg-deep-purple p-4 relative overflow-hidden">
+    <!-- Fondo con efecto de brillo -->
+    <div class="absolute inset-0 bg-grid-pattern opacity-10 group-hover:opacity-20 transition-opacity duration-500"></div>
+    
+    <!-- Contenido -->
+    <div class="relative z-10">
+      <!-- Badge del tipo de proyecto -->
+      <span class={`
+        inline-block px-3 py-1 text-sm rounded-full
+        bg-gradient-to-r ${getTypeColor(type)}
+        transform transition-transform duration-300 group-hover:scale-105 mb-4
+      `}>
+        {type === 'ml' ? 'Machine Learning' : type === 'web' ? 'Web Development' : 'Other'}
+      </span>
+
+      <!-- Contenedor de imagen con efectos -->
+      <div class="relative mb-4 overflow-hidden rounded-lg group-hover:animate-glow">
+        <img
+          src={image || `/api/placeholder/800/600`}
+          alt={title}
+          class="h-48 w-full object-cover transition-all duration-500 group-hover:scale-110"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-deep-purple/90 to-transparent 
+                    opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+      </div>
+
+      <!-- Título con efecto hover -->
+      <h3 class="text-xl font-bold mb-2 group-hover:text-neon-purple transition-colors duration-300
+                 relative inline-block">
+        {title}
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-neon-purple transition-all duration-300
+                     group-hover:w-full"></span>
+      </h3>
+
+      <!-- Descripción con fade in -->
+      <p class="text-gray-300 mb-4 transition-all duration-300 group-hover:text-white">
+        {description}
+      </p>
+
+      <!-- Tecnologías con efectos individuales -->
+      <div class="flex flex-wrap gap-2 mb-4">
+        {technologies.map((tech) => (
+          <TechBadge tech={tech} />
+        ))}
+      </div>
+
+      <!-- Enlaces con efectos neón -->
+      <div class="flex gap-4 mt-auto">
+        {githubUrl && (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-white hover:text-neon-purple transition-all duration-300
+                   transform hover:scale-105"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/>
+            </svg>
+            Código
+          </a>
+        )}
+        {demoUrl && (
+          <a
+            href={demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-white hover:text-neon-pink transition-all duration-300
+                   transform hover:scale-105"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+            Demo
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</article>

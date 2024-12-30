@@ -1,0 +1,50 @@
+---
+---
+
+<button
+  id="scroll-top"
+  aria-label="Volver arriba"
+  class="fixed bottom-8 right-8 z-50 p-2 rounded-lg bg-deep-purple/80 backdrop-blur-sm
+         border border-neon-purple/20 cursor-pointer transition-all duration-300
+         opacity-0 translate-y-10 pointer-events-none
+         hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#B24BF3,0_0_15px_#B24BF3]
+         group"
+>
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    class="w-6 h-6 text-white transition-transform duration-300 group-hover:-translate-y-1" 
+    fill="none" 
+    viewBox="0 0 24 24" 
+    stroke="currentColor"
+  >
+    <path 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="2" 
+      d="M5 10l7-7m0 0l7 7m-7-7v18"
+    />
+  </svg>
+</button>
+
+<script>
+  const scrollButton = document.getElementById('scroll-top');
+
+  function toggleScrollButton() {
+    if (window.scrollY > 200) {
+      scrollButton?.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+    } else {
+      scrollButton?.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Event Listeners
+  window.addEventListener('scroll', toggleScrollButton);
+  scrollButton?.addEventListener('click', scrollToTop);
+</script>

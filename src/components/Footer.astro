@@ -1,0 +1,48 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-10 relative z-10">
+  <div class="container mx-auto px-4">
+    <!-- Separador con gradiente -->
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-neon-purple to-transparent mb-8"></div>
+    
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <!-- Copyright -->
+      <p class="text-gray-400 text-sm text-center md:text-left">
+        © {currentYear} Carlos Eduardo Toscano Sarabio. All rights reserved.
+      </p>
+      
+      <!-- Tech Stack -->
+      <div class="flex items-center gap-3">
+        <span class="text-gray-400 text-sm">Construido con</span>
+        <div class="flex items-center gap-2">
+          <a href="https://astro.build" target="_blank" rel="noopener" 
+             class="group relative">
+            <img 
+              src="https://astro.build/favicon.svg" 
+              alt="Astro" 
+              class="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
+            />
+            <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 
+                         opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                         text-xs text-gray-400 whitespace-nowrap">
+              Astro
+            </span>
+          </a>
+          <a href="https://tailwindcss.com" target="_blank" rel="noopener"
+             class="group relative">
+            <svg viewBox="0 0 248 31" class="w-20 h-5 fill-gray-400 transition-all duration-300 group-hover:fill-[#38bdf8]">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M25.517 0C18.712 0 14.46 3.382 12.758 10.146c2.552-3.382 5.529-4.65 8.931-3.805 1.941.482 3.329 1.882 4.864 3.432 2.502 2.524 5.398 5.445 11.722 5.445 6.804 0 11.057-3.382 12.758-10.145-2.551 3.382-5.528 4.65-8.93 3.804-1.942-.482-3.33-1.882-4.865-3.431C34.736 2.92 31.841 0 25.517 0zM12.758 15.218C5.954 15.218 1.701 18.6 0 25.364c2.552-3.382 5.529-4.65 8.93-3.805 1.942.482 3.33 1.882 4.865 3.432 2.502 2.524 5.397 5.445 11.722 5.445 6.804 0 11.057-3.381 12.758-10.145-2.552 3.382-5.529 4.65-8.931 3.805-1.941-.483-3.329-1.883-4.864-3.432-2.502-2.524-5.398-5.446-11.722-5.446z"></path>
+            </svg>
+            <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 
+                         opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                         text-xs text-gray-400 whitespace-nowrap">
+              Tailwind CSS
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

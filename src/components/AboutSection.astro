@@ -1,0 +1,91 @@
+---
+const experienceYears = new Date().getFullYear() - 2021; // Basado en tu CV
+---
+
+<section id="about" class="py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-12 text-center">
+      <span class="relative inline-block">
+        Sobre Mí
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-neon-pink to-neon-purple"></span>
+      </span>
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <!-- Información Principal -->
+      <div class="space-y-6">
+        <div class="group relative overflow-hidden bg-deep-purple/50 backdrop-blur-sm p-6 rounded-xl border border-neon-purple/20">
+          <!-- Efecto holográfico -->
+          <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent 
+                        translate-x-[-200%] group-hover:translate-x-[200%] 
+                        transition-transform duration-1000 ease-in-out"></div>
+          </div>
+          
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold mb-4 text-neon-purple">Perfil Profesional</h3>
+            <p class="text-gray-300">
+              Ingeniero en Sistemas Computacionales con especialización en Machine Learning y desarrollo web. 
+              Con {experienceYears}+ años de experiencia en proyectos que combinan tecnologías modernas 
+              con soluciones innovadoras.
+            </p>
+          </div>
+        </div>
+
+        <div class="group relative overflow-hidden bg-deep-purple/50 backdrop-blur-sm p-6 rounded-xl border border-neon-pink/20">
+          <!-- Efecto holográfico -->
+          <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent 
+                        translate-x-[-200%] group-hover:translate-x-[200%] 
+                        transition-transform duration-1000 ease-in-out"></div>
+          </div>
+          
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold mb-4 text-neon-pink">Educación</h3>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-bold">Escuela Superior de Cómputo "ESCOM"</h4>
+                <p class="text-gray-400">Ingeniería en Sistemas Computacionales</p>
+                <p class="text-gray-500">2021 - Actualidad | 94.19% Créditos</p>
+              </div>
+              <div>
+                <h4 class="font-bold">CECyT 7 "Cuauhtémoc"</h4>
+                <p class="text-gray-400">Técnico en Sistemas Automotrices</p>
+                <p class="text-gray-500">2017 - 2020</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Habilidades Blandas -->
+      <div class="group relative overflow-hidden bg-deep-purple/50 backdrop-blur-sm p-6 rounded-xl border border-neon-violet/20">
+        <!-- Efecto holográfico -->
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent 
+                      translate-x-[-200%] group-hover:translate-x-[200%] 
+                      transition-transform duration-1000 ease-in-out"></div>
+        </div>
+        
+        <div class="relative z-10">
+          <h3 class="text-2xl font-bold mb-6 text-neon-violet">Habilidades Blandas</h3>
+          <div class="grid grid-cols-2 gap-6">
+            {[
+              { skill: 'Pensamiento Lógico', icon: '🧠' },
+              { skill: 'Trabajo en Equipo', icon: '👥' },
+              { skill: 'Responsabilidad', icon: '✅' },
+              { skill: 'Comunicación Efectiva', icon: '💬' },
+              { skill: 'Adaptabilidad', icon: '🔄' },
+              { skill: 'Capacidad de Aprender', icon: '📚' }
+            ].map((item) => (
+              <div class="flex items-center gap-3 group cursor-default">
+                <span class="text-2xl group-hover:scale-125 transition-transform duration-300">{item.icon}</span>
+                <span class="text-gray-300 group-hover:text-white transition-colors duration-300">{item.skill}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

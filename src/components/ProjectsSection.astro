@@ -1,0 +1,139 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { Project, ProjectFilter } from '../types/projects';
+
+const projects: Project[] = [
+  {
+    id: "1",
+    title: "Detector de FakeNews con NLP",
+    description: "Sistema de clasificación de texto usando modelos de Machine Learning para detectar noticias falsas, evaluando diferentes modelos y su eficacia.",
+    technologies: ["Python", "NLP", "scikit-learn", "TensorFlow"],
+    image: "/src/assets/city-1.jpg",
+    githubUrl: "#",
+    type: "ml",
+    featured: true
+  },
+  {
+    id: "2",
+    title: "Proyecto Lagarto",
+    description: "Frontend para el proyecto del Centro de Investigación en Computación (CIC) enfocado en educación tecnológica con semiconductores.",
+    technologies: ["React", "NextJs", "Spring", "MySQL"],
+    image: "/src/assets/city-1.jpg",
+    githubUrl: "#",
+    demoUrl: "#",
+    type: "web"
+  },
+  {
+    id: "3",
+    title: "Recomendador de Directores TT",
+    description: "Plataforma web que utiliza Machine Learning para recomendar directores de trabajo terminal basado en las aptitudes de los alumnos.",
+    technologies: ["NextJs", "Django", "Machine Learning"],
+    image: "/src/assets/city-1.jpg",
+    githubUrl: "#",
+    type: "ml"
+  }
+];
+
+const filters: ProjectFilter[] = ['all', 'ml', 'web', 'other'];
+---
+
+<section id="projects" class="py-20">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-bold mb-12 text-center">
+      <span class="relative inline-block">
+        Proyectos
+        <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-neon-purple to-neon-violet"></span>
+      </span>
+    </h2>
+
+    <!-- Filtros -->
+    <div class="flex justify-center gap-4 mb-12 perspective-1000">
+      {filters.map((filter) => (
+        <button
+          class="relative px-6 py-3 text-white overflow-hidden rounded-lg transition-all duration-300
+                 group hover:-translate-y-1 hover:shadow-[0_0_2px_#fff,inset_0_0_2px_#fff,0_0_5px_#B24BF3,0_0_15px_#B24BF3]
+                 data-[active=true]:bg-neon-purple/20"
+          data-filter={filter}
+          data-active={filter === 'all' ? 'true' : 'false'}
+        >
+          <span class="relative z-10">
+            {filter === 'all' ? 'Todos' : 
+             filter === 'ml' ? 'Machine Learning' : 
+             filter === 'web' ? 'Web Dev' : 'Otros'}
+          </span>
+          <div class="absolute inset-0 bg-gradient-to-r from-neon-purple/20 to-neon-pink/20 opacity-0 
+                      group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div class="absolute bottom-0 left-0 h-[2px] w-full bg-gradient-to-r from-neon-purple to-neon-pink 
+                      transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+        </button>
+      ))}
+    </div>
+
+    <!-- Grid de Proyectos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
+      {projects.slice(0, 3).map((project) => (
+        <div class="project-item" data-type={project.type}>
+          <ProjectCard {...project} />
+        </div>
+      ))}
+    </div>
+
+    <!-- Botón Ver Más -->
+    {projects.length > 3 && (
+      <div class="flex justify-center mt-12">
+        <a href="/projects" 
+           class="group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden 
+                  text-lg font-medium text-white rounded-lg bg-deep-purple hover:scale-105 
+                  transition-all duration-300">
+          <span class="relative z-10 flex items-center gap-2">
+            Ver más proyectos
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" 
+                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </span>
+          <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-neon-purple to-neon-pink opacity-0 
+                      group-hover:opacity-20 transition-opacity duration-300"></div>
+        </a>
+      </div>
+    )}
+  </div>
+</section>
+
+<script>
+  // Script para manejar los filtros
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('[data-filter]');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Actualizar estado activo de los botones
+        filterButtons.forEach(btn => btn.setAttribute('data-active', 'false'));
+        button.setAttribute('data-active', 'true');
+
+        const filterValue = button.getAttribute('data-filter');
+
+        projectItems.forEach(item => {
+          const itemType = item.getAttribute('data-type');
+          if (filterValue === 'all' || filterValue === itemType) {
+            (item as HTMLElement).style.display = 'block';
+            // Agregar animación de fade
+            (item as HTMLElement).style.opacity = '0';
+            setTimeout(() => {
+              (item as HTMLElement).style.opacity = '1';
+            }, 50);
+          } else {
+            (item as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .project-item {
+    transition: opacity 0.3s ease-in-out;
+  }
+</style>
